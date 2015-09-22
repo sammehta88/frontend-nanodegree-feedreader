@@ -3,7 +3,6 @@
  * This is the spec file that Jasmine will read and contains
  * all of the tests that will be run against your application.
  */
-
 /* We're placing all of our tests within the $() function,
  * since some of these tests may require DOM elements. We want
  * to ensure they don't run until the DOM is ready.
@@ -27,12 +26,12 @@ $(function() {
          * has a url property defined and not empty
          */
 
-         it('has a url defined', function() {
-            allFeeds.forEach(function(feed){
+        it('has a url defined', function() {
+            allFeeds.forEach(function(feed) {
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
             });
-         });
+        });
 
 
         /**
@@ -41,11 +40,11 @@ $(function() {
          */
 
         it('has a name defined', function() {
-            allFeeds.forEach(function(feed){
+            allFeeds.forEach(function(feed) {
                 expect(feed.name).toBeDefined();
                 expect(feed.name.length).not.toBe(0);
             });
-         });
+        });
     });
 
 
@@ -63,53 +62,52 @@ $(function() {
             expect(body.hasClass('menu-hidden')).toBe(true);
         });
 
-         /**
-          * Tests menu visibility when the menu icon is clicked. This test
-          * has two expectations: does the menu display when
-          * clicked and does it hide when clicked again.
-          */
-          it('changes visibility when clicked', function(){
+        /**
+         * Tests menu visibility when the menu icon is clicked. This test
+         * has two expectations: does the menu display when
+         * clicked and does it hide when clicked again.
+         */
+        it('changes visibility when clicked', function() {
             menuIcon.click();
             expect(body.hasClass('menu-hidden')).toBe(false);
             menuIcon.click();
             expect(body.hasClass('menu-hidden')).toBe(true);
-          });
+        });
     });
 
     describe('Initial Entries', function() {
 
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
+
 
         /**
          * Tests when the loadFeed function is called and completes its work,
          * there is at least one single .entry element within the .feed container.
          */
-         it('have at least one entry after feed is loaded', function(done) {
+        it('have at least one entry after feed is loaded', function(done) {
             //var entries = $('.feed').children('.entry');
             var entries = $('.entry');
             expect(entries.length).not.toBe(0);
             done();
-         });
+        });
     });
 
-    describe('New Feed Selection', function(){
+    describe('New Feed Selection', function() {
 
         /**
          * Tests that the content actually changes when a new feed is loaded
          * by the loadFeed function that the content actually changes.
          */
-         var firstFeed,
-             secondFeed;
+        var firstFeed,
+            secondFeed;
 
-         beforeEach(function(done) {
+        beforeEach(function(done) {
             loadFeed(0, function() {
-                firstFeed = $('.feed');
+                firstFeed = $('.feed').html();
                 loadFeed(1, function() {
-                    secondFeed = $('.feed');
+                    secondFeed = $('.feed').html();
                     done();
                 });
             });
